@@ -18,7 +18,7 @@ Follow `references/gather.md`. A requirement is optional here: use one when step
 
 ## 2. Intent
 
-Delegate to `review-intent` (mode `hunt`, assignment "whole diff"). Save to `intent.md`.
+Delegate to `review-intent` (mode `hunt`, assignment "whole diff", output file `intent.md`).
 
 ## 3. Checkpoint
 
@@ -26,7 +26,7 @@ Show the user Purpose, Behavior map, New / Changed / Broken, the Needed? section
 
 ## 4. Units and Simplifier, in parallel
 
-- `review-unit` personas in batches of 3–5 units by area (at most 6 batches), mode `hunt`. Save to `units.md` in unit order.
+- `review-unit` personas in batches of 3–5 units by area (at most 6 batches), mode `hunt`, each with its own output file; merge them into `units.md`.
 - One `review-simplifier`, mode `hunt`. Save to `simplifier.md`.
 
 Done when every change unit has a block in `units.md`.
@@ -62,6 +62,12 @@ Requirement: <source or "none">   Skipped: <steps or "none">
 
 ## Checks
 <pass/fail per command>
+
+## Needs runtime check
+<claims personas tagged `needs runtime check`, with unit and why>
+
+## Manual test plan
+<numbered checks: action → expected result; one per New/Changed behavior, issue, and runtime-check claim>
 
 ## Change units
 | ID | Intent | Verdict |

@@ -51,7 +51,4 @@ Raise a challenge only when the proposal is clearly easier to read or clearly ch
 
 ## Answering a challenge
 
-The implementer answers each challenge with:
-
-- **accept**: simplify the code, or
-- **defend**: cite evidence the complexity is needed **now** (a requirement line, an ADR, a real second caller at `file:line`). "Cleaner", "more flexible" or "future-proof" without evidence is not a defense; the challenge stays open.
+The implementer answers each challenge with **accepted** (simplify the code) or **defended** (evidence the complexity is needed **now**: a requirement line, an ADR, a real second caller at `file:line`), as `responses.md` records it. "Cleaner", "more flexible" or "future-proof" without evidence is not a defense; the challenge stays open.

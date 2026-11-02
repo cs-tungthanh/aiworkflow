@@ -21,12 +21,13 @@ Orchestrator: gather (diff, requirement, rulebook, checks) → .scratch/reviews/
 ```
 
 - **Clean room**: the orchestrator only gathers and assembles. Every judgement comes from a persona that sees the workspace files and the repo, never the conversation that wrote the code.
-- **Hand-off**: the fixer answers each finding id in `responses.md` (`fixed` / `accepted` / `defended: <evidence>`); the next run verifies those answers.
+- **Hand-off**: `responses.md` records an answer per id: `decided` for the author, `fixed` / `accepted` / `defended: <evidence>` for the implementer, `open` otherwise (`rules/responses.md`). The next run verifies them. A branch that fixes an earlier review gets a follow-up review that carries the earlier round over.
+- **Manual test plan**: each report ends with checks built from the behavior map, findings, and claims tagged `needs runtime check`.
 
 ## Layout
 
 ```
-rules/       source of truth: gather, delegate, change-checks, simplicity, risk
+rules/       source of truth: gather, delegate, responses, change-checks, simplicity, risk
 personas/    persona prompts; {{include rules/x.md}} is inlined at build time
 skills/      SKILL.md per skill (portable Agent Skills format)
 build.py     generates dist/ for each tool and installs it

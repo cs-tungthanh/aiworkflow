@@ -19,14 +19,18 @@ Give each persona exactly:
 ```
 Workspace: <absolute path to .scratch/reviews/<slug>/>
 Repo: <absolute repo path>   Head: <ref>   Base: <ref>
+Head code: <worktree path, or "repo working tree">   Base code: <worktree path, or "use git show <base>:<file>">
 Mode: review | hunt | wip
 Assignment: <e.g. "Units U1, U2, U5" or "all challenges">
+Output file: <workspace>/<file> (e.g. units-U1-U3.md)
 ```
 
 Add nothing about how the code came to be, what the implementer intended, or what you think of it.
 
 ## Saving results
 
-Save each persona's returned text verbatim to the workspace file the skill names (`intent.md`, `units.md`, `simplifier.md`, `verifier.md`). When several unit reviewers ran, concatenate their blocks into `units.md` in unit order.
+A persona writes its full output to its output file and returns only a short summary (verdict counts, top items). When a persona could not write (Cursor runs personas with `readonly`), it returns the full text instead; save that verbatim to the output file. Keep full reports out of your own context: read an output file only for the parts you need to assemble the report.
+
+Output files: `intent.md`, `units-<first>-<last>.md` per unit batch, `simplifier.md`, `verifier.md`. After all unit batches finish, merge them into `units.md` in unit order (split on the `### U<n>:` headings with a short script; do not retype).
 
 When a persona returns something malformed or skips assigned items, send it back once with the missing items listed. Report any gap that remains in the final report rather than filling it yourself.

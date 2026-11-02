@@ -6,6 +6,8 @@ How to judge one **change unit**: a group of hunks that changed for one reason. 
 
 Every claim cites evidence: `file:line` in the head code, a hunk in `diff.patch`, a line in `requirement.md` or `rulebook.md`, a result in `checks.md`, or `git blame`/`git log` output. A check that has no evidence yet is not done: investigate (read callers, read tests, trace the data, `git blame` the old line) until it has evidence or is honestly **unknown**. A guess is never a verdict.
 
+Some claims depend on behavior the code alone cannot show: what a browser, a third-party page, the OS, a device or another service does at runtime (for example "a click on this overlay no longer reaches the player"). Tag each such claim `needs runtime check` and say what would confirm it. Never state it as fact.
+
 The PR description, commit messages and code comments are the implementer's **claims**. Use them as leads, then confirm them in the requirement or the code.
 
 ## 1. Why
