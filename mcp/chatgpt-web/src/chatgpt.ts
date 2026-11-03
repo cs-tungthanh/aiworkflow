@@ -51,9 +51,21 @@ export interface AskOptions {
 let browser: Browser | undefined;
 let currentPage: Page | undefined;
 
+// On macOS, closing the last window leaves Chrome running with no browser context, and attaching then
+// fails ("Browser context management is not supported"). Open a chatgpt.com window first.
+async function ensureWindow(): Promise<void> {
+  const targets = (await fetch(`${CDP_URL}/json/list`).then((r) => r.json()).catch(() => undefined)) as
+    | { type: string }[]
+    | undefined;
+  if (targets && !targets.some((t) => t.type === 'page')) {
+    await fetch(`${CDP_URL}/json/new?${HOME_URL}`, { method: 'PUT' });
+  }
+}
+
 async function getBrowser(): Promise<Browser> {
   if (browser?.isConnected()) return browser;
   try {
+    await ensureWindow();
     browser = await chromium.connectOverCDP(CDP_URL);
   } catch (err) {
     throw new Error(
@@ -382,6 +394,7 @@ export async function readLastReply(conversationUrl: string | undefined, wait: b
 export async function status(): Promise<Record<string, unknown>> {
   try {
     const page = await getPage();
+    await page.locator(SEL.composer).waitFor({ timeout: 15_000 }).catch(() => {});
     const state = await detectState(page);
     // The page no longer names the model; the only model control is the "Think" toggle.
     const think = page.locator('form button', { hasText: /^Think$/ }).first();
