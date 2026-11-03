@@ -32,7 +32,10 @@ personas/    persona prompts; {{include rules/x.md}} is inlined at build time
 skills/      SKILL.md per skill (portable Agent Skills format)
 build.py     generates dist/ for each tool and installs it
 dist/        generated, do not edit
+mcp/         standalone MCP servers, installed by hand (see each one's README)
 ```
+
+`mcp/chatgpt-web` lets an agent get a second-opinion review from ChatGPT web, using your logged-in Chrome rather than the API.
 
 ## Install
 
